@@ -54,11 +54,18 @@ function getMostCommonGenres(books) {
 }
 
 function getMostPopularBooks(books) {
-   //using the map method, return a new array from the books array
-   return books.map((book) => {
-    //return the title of the given book, along with its borrow count
-      return {name: book.title, count: book.borrows.length}
-    }).sort((book1, book2) => book2.count - book1.count).slice(0, 5)
+  const result = books.map(book => {
+    return {
+      name: book.title,
+      count: book.borrows.length
+    }
+  })
+  return sortByCount(result)
+    .filter((item, i) => i < 5)
+}
+//helper function
+function sortByCount(array) {
+return array.sort((a, b) => b.count - a.count)
 }
 
 function getMostPopularAuthors(books, authors) {
